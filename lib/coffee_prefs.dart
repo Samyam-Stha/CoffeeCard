@@ -9,7 +9,7 @@ class CoffeePrefs extends StatefulWidget {
 
 class _CoffeePrefsState extends State<CoffeePrefs> {
   int strength = 1;
-  int sugar = 1;
+  int sugar = 0;
   void increaseStrength() {
     setState(() {
       strength = strength < 5 ? strength + 1 : 1;
@@ -29,13 +29,13 @@ class _CoffeePrefsState extends State<CoffeePrefs> {
         Row(
           children: [
             const Text('Strength: '),
-            Text('$strength'),
-            Image.asset(
-              'assets/img/coffee_bean.png',
-              width: 25,
-              color: Colors.brown[100],
-              colorBlendMode: BlendMode.multiply,
-            ),
+            for (int i = 0; i < strength; i++)
+              Image.asset(
+                'assets/img/coffee_bean.png',
+                width: 25,
+                color: Colors.brown[100],
+                colorBlendMode: BlendMode.multiply,
+              ),
             Expanded(child: SizedBox()),
             FilledButton(
               style: FilledButton.styleFrom(
@@ -50,13 +50,16 @@ class _CoffeePrefsState extends State<CoffeePrefs> {
         Row(
           children: [
             const Text('Sugar: '),
-            Text('$sugar'),
-            Image.asset(
-              'assets/img/sugar_cube.png',
-              width: 25,
-              color: Colors.brown[100],
-              colorBlendMode: BlendMode.multiply,
-            ),
+
+            if (sugar == 0) const Text('No sugar'),
+
+            for (int i = 0; i < sugar; i++)
+              Image.asset(
+                'assets/img/sugar_cube.png',
+                width: 25,
+                color: Colors.brown[100],
+                colorBlendMode: BlendMode.multiply,
+              ),
             Expanded(child: SizedBox()),
             FilledButton(
               style: FilledButton.styleFrom(
